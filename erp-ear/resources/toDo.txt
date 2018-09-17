@@ -1,0 +1,4 @@
+1) Corrigir bug dos importes de js e css com condição para os ie 7/8/9
+2) Mapear todo que posso ser colocado em cache
+3) Varrer todas as string de mensagem e coloca no message.properties
+4)

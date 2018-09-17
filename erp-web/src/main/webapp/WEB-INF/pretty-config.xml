@@ -1,0 +1,39 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+	<!-- #Blog -->
+	<url-mapping id="login">
+		<pattern value="/blog" />
+		<view-id value="/pages/blog/blog.jsf" />
+	</url-mapping>
+	<!-- #Login -->
+	<url-mapping id="login">
+		<pattern value="/login" />
+		<view-id value="/pages/login/login.jsf" />
+	</url-mapping>
+	
+	<!-- #Dashboard -->
+	<url-mapping id="dashboard">
+		<pattern value="/dashboard" />
+		<view-id value="/pages/dashboard/dashboard.jsf" />
+	</url-mapping>
+	
+	<!-- #Cadastro -->
+	<url-mapping id="cadastro_usuario">
+		<pattern value="/dashboard/cadastro/usuario" />
+		<view-id value="/pages/dashboard/cadastro/usuario.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="cadastro_produto">
+		<pattern value="/dashboard/cadastro/produto-servico" />
+		<view-id value="/pages/dashboard/cadastro/produtos.jsf" />
+	</url-mapping>	
+	
+	<url-mapping id="cadastro_blog">
+		<pattern value="/dashboard/cadastro/blog" />
+		<view-id value="/pages/dashboard/cadastro/blog.jsf" />
+	</url-mapping>	
+
+</pretty-config>

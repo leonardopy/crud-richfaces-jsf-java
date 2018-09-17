@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="pt-br" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="pt-br" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  	xmlns:h="http://xmlns.jcp.org/jsf/html"
+  	xmlns:a4j="http://richfaces.org/a4j"
+  	xmlns:jsf="http://xmlns.jcp.org/jsf"
+  	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+  	xmlns:rich="http://richfaces.org/rich">
+<!--<![endif]-->
+
+<h:head>
+	<meta charset="utf-8"/>
+	<title><ui:insert name="title">Sistema RP</ui:insert></title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description "/>
+	<meta content="leonardopy@gmail.com" name="author" />
+	
+	 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css"/>
+		<h:outputStylesheet name="theme/assets/global/plugins/font-awesome/css/font-awesome.min.css" />
+		<h:outputStylesheet name="theme/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" />
+		<h:outputStylesheet name="theme/assets/global/plugins/bootstrap/css/bootstrap.min.css" />
+		<h:outputStylesheet name="theme/assets/global/plugins/uniform/css/uniform.default.css" />
+		<!-- END GLOBAL MANDATORY STYLES -->
+		<!-- BEGIN PAGE LEVEL STYLES -->
+			 <ui:insert name="css" />
+		<!-- END PAGE LEVEL SCRIPTS -->
+		<!-- BEGIN THEME STYLES -->
+		<h:outputStylesheet name="theme/assets/global/css/components-rounded.css" id="style_components" />
+		<h:outputStylesheet name="theme/assets/global/css/plugins.css" />
+		<h:outputStylesheet name="theme/assets/admin/layout/css/layout.css" />
+		<h:outputStylesheet name="theme/assets/admin/layout/css/custom.css" />
+		<!-- END THEME STYLES -->
+
+	<link rel="shortcut icon" href="#{request.contextPath}/resource/img/favicon.ico"/>
+</h:head>
+
+<h:body styleClass="#{bodyCss}">
+
+	  <ui:insert name="content" />
+	  
+</h:body>
+
+</html>

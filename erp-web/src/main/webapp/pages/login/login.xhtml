@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="pt-br" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="pt-br" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  	xmlns:h="http://xmlns.jcp.org/jsf/html"
+  	xmlns:a4j="http://richfaces.org/a4j"
+  	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+  	xmlns:rich="http://richfaces.org/rich">
+<!--<![endif]-->
+
+<h:body>
+    <ui:composition template="/layouts/templateBody.xhtml">
+    	<ui:param name="bodyCss" value="login" />
+		<ui:define name="title">Login</ui:define>
+    	
+    	<ui:define name="css">		
+    		<h:outputStylesheet name="theme/assets/admin/pages/css/login.css" />
+  		</ui:define>
+    
+		<ui:define name="content">		
+	
+			<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+			<div class="menu-toggler sidebar-toggler">
+			</div>
+			<!-- END SIDEBAR TOGGLER BUTTON -->
+			<!-- BEGIN LOGO -->
+			<div class="logo">
+				<a href="#{loginMBean.getServerContextPath()}/resources/theme/assets/admin/layout/img/logo-big.png" alt="">
+				</a>
+			</div>
+			<!-- END LOGO -->
+			<!-- BEGIN LOGIN -->
+			<div class="content">
+				<!-- BEGIN LOGIN FORM -->
+				<h:form id="form_login" styleClass="login-form" prependId="false">
+					<h3 class="form-title">  </h3>
+
+					<h:panelGroup layout="block" styleClass="alert alert-danger #{facesContext.maximumSeverity == null?'display-hide':''}" >
+						<button class="close" data-close="alert"></button>
+							<ui:repeat var="msg0" value="#{facesContext.messageList}">
+						     <div>#{msg0.summary}</div>
+						   </ui:repeat>
+					</h:panelGroup>
+					
+					<div class="form-group">
+						<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+						<label class="control-label visible-ie8 visible-ie9">Login</label>
+						<h:inputText id="login" name="login" 
+								pt:placeholder="Login"
+					        	autocomplete="off"
+					        	styleClass="form-control form-control-solid placeholder-no-fix"
+					        	required="true"
+					        	requiredMessage="Entre com seu login"
+					        	maxlength="100"
+					        	value="#{loginMBean.login}"
+					      />
+					</div>
+					<div class="form-group">
+						<label class="control-label visible-ie8 visible-ie9">Senha</label>
+						<h:inputSecret id="senha" name="senha"
+								pt:placeholder="Senha"
+								styleClass="form-control form-control-solid placeholder-no-fix"
+					        	required="true"
+					        	requiredMessage="Entre com sua senha"
+					        	maxlength="8"
+					        	value="#{loginMBean.senha}"
+					      />
+					</div>
+					<div class="form-actions">
+						<a4j:commandButton
+			         			styleClass="btn btn-success uppercase"
+			            		id="login_usuario" 
+			            		status="waitModalStatus"
+			            		value="Entrar"
+			            		render="form_login"
+			            		action="#{loginMBean.logarUsuario()}" >
+			            </a4j:commandButton> 
+						<a href="javascript:;" id="forget-password" class="forget-password">Esqueceu a senha?</a>
+					</div>
+				</h:form>
+				<!-- END LOGIN FORM -->
+				<!-- BEGIN FORGOT PASSWORD FORM -->
+				<form class="forget-form" action="index.html" method="post">
+					<h3>Esqueceu sua Senha?</h3>
+					<p>
+						Entre com seu e-mail e receba as instruções
+					</p>
+					<div class="form-group">
+						<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email"/>
+					</div>
+					<div class="form-actions">
+						<button type="button" id="back-btn" class="btn btn-default">Voltar</button>
+						<button type="submit" class="btn btn-success uppercase pull-right">Enviar</button>
+					</div>
+				</form>
+				<!-- END FORGOT PASSWORD FORM -->
+			</div>
+			<div class="copyright">
+				 2016 © Sistema Administração.
+			</div>
+			<!-- END LOGIN -->
+			<!-- BEGIN JAVASCRIPTS-->
+			<!-- BEGIN CORE PLUGINS -->
+			
+			<!--[if lt IE 9]>
+				<h:outputScript name="theme/assets/global/plugins/respond.min.js" />
+				<h:outputScript name="theme/assets/global/plugins/excanvas.min.js" /> 
+			<![endif]-->
+			
+			<h:outputScript name="theme/assets/global/plugins/jquery.min.js" />
+			<h:outputScript name="theme/assets/global/plugins/jquery-migrate.min.js" />
+			<h:outputScript name="theme/assets/global/plugins/bootstrap/js/bootstrap.min.js" />
+			<h:outputScript name="theme/assets/global/plugins/jquery.blockui.min.js" />
+			<h:outputScript name="theme/assets/global/plugins/uniform/jquery.uniform.min.js" />
+			<h:outputScript name="theme/assets/global/plugins/jquery.cokie.min.js" />
+			<!-- END CORE PLUGINS -->
+			<!-- BEGIN PAGE LEVEL PLUGINS -->
+			<h:outputScript name="theme/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" />
+			<!-- END PAGE LEVEL PLUGINS -->
+			<!-- BEGIN PAGE LEVEL SCRIPTS -->
+			<h:outputScript name="theme/assets/global/scripts/metronic.js" />
+			<h:outputScript name="theme/assets/admin/layout/scripts/layout.js" />
+			<h:outputScript name="theme/assets/admin/pages/scripts/login.js" />
+			<!-- END PAGE LEVEL SCRIPTS -->
+			<script>
+				jQuery(document).ready(function() {     
+					Metronic.init(); // init core components
+					Layout.init(); // init current layout
+					Login.init();
+				});
+			</script>
+			<!-- END JAVASCRIPTS -->
+	    </ui:define>
+	
+    </ui:composition>
+  </h:body>
+</html>

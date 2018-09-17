@@ -1,0 +1,30 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+>
+	<div id="#{idModal}" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+		<h:form  prependId="false">	
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-body">
+						 #{description}
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Não</button>
+						<button class="btn btn-sm btn-success" jsf:action="#{bean[confirmMethod]()}" data-dismiss="modal">
+							<i class="fa fa-check"></i> Sim
+							<f:ajax execute="@this" render="#{confirmRender}" />
+						</button>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</div>
+
+</f:view>

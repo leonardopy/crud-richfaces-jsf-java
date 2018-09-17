@@ -1,0 +1,57 @@
+/*--------------------------------------------------
+    [TRANSITION]
+----------------------------------------------------*/
+/* Cubic Bezier Transition */
+/***
+Controle Rapido page
+***/
+
+.invoice table {
+  margin: 0px 0 5px 0; 
+}
+
+#form_controle_rapido .invoice .portlet {
+	  margin-bottom: 0px;
+}
+
+.invoice hr{
+  margin: 0px 0px 20px 0px; 
+}
+
+.invoice .number-control {
+  margin-bottom: 10px;
+  margin-right: 20px;
+  
+}
+
+.invoice .number-control p {
+  padding: 5px 0;
+  font-size: 26px;
+  line-height: 28px;
+  text-align: right;
+}
+
+.invoice .number-control p span {
+  font-size: 14px;
+}
+
+.invoice .invoice-logo-space {
+  margin-bottom: 10px;
+}
+
+.invoice .invoice-payment strong {
+  margin-right: 5px;
+}
+
+.invoice .invoice-block {
+  text-align: right;
+}
+
+.invoice .description-product {
+	margin-left: 30px;
+}
+
+.invoice .invoice-block .amounts {
+  margin-top: 20px;
+  font-size: 14px;
+}

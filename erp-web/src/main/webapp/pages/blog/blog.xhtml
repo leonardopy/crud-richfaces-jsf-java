@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="pt-br" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="pt-br" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  	xmlns:h="http://xmlns.jcp.org/jsf/html"
+  	xmlns:a4j="http://richfaces.org/a4j"
+  	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+  	xmlns:rich="http://richfaces.org/rich">
+<!--<![endif]-->
+<h:head>
+	<ui:define name="title">Orange Blog </ui:define>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<meta content="width=device-width, initial-scale=1" name="viewport"/>
+	
+</h:head>
+
+
+<h:body>
+	    		<h:outputStylesheet name="blog/styl.css"/>
+	    		
+<div id="page" >
+  <h1 id="header"><a href="#">Desafio CAC Blog</a> </h1>
+  <div id="left">
+    
+    
+    <ui:repeat var="b" id="blogApresentacaoList" value="#{blogMBean.blogApresentacaoList}">
+    
+    <div class="article">
+      <div class="top">
+        <p class="calendar">#{b.dataCadastro}</p>
+        <h2>#{b.titulo}</h2>
+        <p class="info">#{b.usuario.login} <span class="category"></span> <span class="comments"></span> </p>
+      </div>
+      <div class="text">
+        #{b.descricao}
+      </div>
+    </div>
+    
+    </ui:repeat>
+    
+    <div id="disqus_thread"></div>
+		<script>
+		/**
+		* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+		* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+		*/
+		/*
+		var disqus_config = function () {
+		this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+		};
+		*/
+		(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		
+		s.src = '//leopydesafiocac.disqus.com/embed.js';
+		
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+		})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        
+    
+  </div>
+  <div id="right">
+    <ul id="rss">
+      <li>RSS:</li>
+      <li><a href="http://all-free-download.com/free-website-templates/">Articles</a></li>
+      <li><a href="http://all-free-download.com/free-website-templates/">Comments</a></li>
+    </ul>
+    <form id="search" action="http://all-free-download.com/free-website-templates/">
+      <p>
+        <input type="text" value="Search..." name="string" class="input" />
+        <input type="submit" value="" class="submit" />
+      </p>
+    </form>
+    <h4>Categories</h4>
+    <ul class="categories">
+      <li><a href="http://all-free-download.com/free-website-templates/">Ligula a ultrices</a></li>
+      <li><a href="http://all-free-download.com/free-website-templates/">Fusce sed</a></li>
+      <li><a href="http://all-free-download.com/free-website-templates/">Nulla laoreet</a></li>
+      <li><a href="http://all-free-download.com/free-website-templates/">Vetellus molestie</a></li>
+      <li><a href="http://all-free-download.com/free-website-templates/">Nunc porta ipsum</a></li>
+    </ul>
+    <h4>Archive</h4>
+    <ul class="archive">
+      <li><a href="http://all-free-download.com/free-website-templates/">January 2008</a></li>
+      <li><a href="http://all-free-download.com/free-website-templates/">February 2008</a></li>
+      <li><a href="http://all-free-download.com/free-website-templates/">March 2008</a></li>
+      <li><a href="http://all-free-download.com/free-website-templates/">April 2008</a></li>
+      <li><a href="http://all-free-download.com/free-website-templates/">May 2008</a></li>
+    </ul>
+    <h4>Links</h4>
+    <ul class="links">
+      <li><a href="http://all-free-download.com/free-website-templates/">flavicius.php5.cz</a></li>
+      <li><a href="http://all-free-download.com/free-website-templates/">venenatis.com</a></li>
+      <li><a href="http://all-free-download.com/free-website-templates/">fucsesed.com</a></li>
+      <li><a href="http://all-free-download.com/free-website-templates/">sedopellente.org</a></li>
+    </ul>
+  </div>
+  <div id="best">
+    <div class="col">
+      <h3>Last articles</h3>
+      <ul>
+        <li> <a href="http://all-free-download.com/free-website-templates/">Curabitur lacinia peletesque</a> <span>11-14-2008</span> </li>
+        <li> <a href="http://all-free-download.com/free-website-templates/">Curabitur lacinia peletesque</a> <span>11-14-2008</span> </li>
+        <li> <a href="http://all-free-download.com/free-website-templates/">Curabitur lacinia peletesque</a> <span>11-14-2008</span> </li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Recent comments</h3>
+      <ul class="recent-comments">
+        <li> <a href="http://all-free-download.com/free-website-templates/">Curabitur:</a> <span>Lorem ipsum dolor sit amet, consectetur...</span> </li>
+        <li> <a href="http://all-free-download.com/free-website-templates/">Peletesque:</a> <span>Quisque vulputate, orci et congue cursus, est nisl...</span> </li>
+        <li> <a href="http://all-free-download.com/free-website-templates/">Lacinia</a> <span> Sed sed elit semper libero congue cursus...</span> </li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>About this site</h3>
+      <p> Quisque vulputate, orci et congue cursus, est nisl condimentum ante, ut rutrum libero tellus id mauris. Nunc ultricies mollis ligula. </p>
+      <p> Suspendisse eu nunc. Duis pulvinar lacinia sapien. Fusce varius felis at enim. </p>
+      <p> Nunc ultricies mollis ligula. </p>
+    </div>
+    <div class="cleaner"></div>
+  </div>
+  <p class="footer"> Design by <a href="http://www.seokings.cz/internetovy-marketing">seokings.cz</a>, sponsored link: <a href="http://online-airline-tickets.co.uk">Airline Tickets</a> <br />
+    In faucibus elementum augue. Nam dapibus, nisi a vehicula </p>
+</div>
+<div>This template  downloaded form <a href='http://all-free-download.com/free-website-templates/'>free website templates</a></div></h:body>
+</html>

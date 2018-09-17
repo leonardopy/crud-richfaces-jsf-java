@@ -1,0 +1,383 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="pt-br" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="pt-br" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  	xmlns:h="http://xmlns.jcp.org/jsf/html"
+  	xmlns:a4j="http://richfaces.org/a4j"
+  	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+  	xmlns:rich="http://richfaces.org/rich"
+  	xmlns:jsf="http://xmlns.jcp.org/jsf"
+  	xmlns:f="http://xmlns.jcp.org/jsf/core" 
+ 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+  	>
+<!--<![endif]-->
+
+	<h:body>
+	    <ui:composition template="/layouts/template.xhtml">
+    		<ui:param name="bodyCss" 	value="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo" />
+    		<ui:param name="bean" 		value="#{usuarioMBean}" />
+    		
+    		<ui:define name="title">Cadastro de Usuário </ui:define>
+    		
+	    	<ui:define name="css">		
+	    		<h:outputStylesheet name="theme/assets/global/plugins/select2/select2.css"/>
+	    		<h:outputStylesheet name="theme/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+	    		<h:outputStylesheet name="theme/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" />
+	    		
+	  		</ui:define>
+	  		
+	    	<ui:define name="content">
+				
+			  	<div class="page-content-wrapper">
+					<div class="page-content">
+			
+						<!-- BEGIN PAGE HEADER-->
+						<!-- BEGIN PAGE HEAD -->
+						<div class="page-head">
+							<!-- BEGIN PAGE TITLE -->
+							<div class="page-title hide">
+								<h1>Cadastro de Usuário <small></small></h1>
+							</div>
+							<!-- END PAGE TITLE -->
+						</div>
+						<!-- END PAGE HEAD -->
+						<!-- BEGIN PAGE BREADCRUMB -->
+						<ul class="page-breadcrumb breadcrumb">
+							<li>
+								<a href="#{usuarioMBean.getServerContextPath()}dashboard">Página Inicial</a>
+								<i class="fa fa-circle"></i>
+							</li>
+							<li>
+								<a href="javascript:void(0)">Cadastros</a>
+								<i class="fa fa-circle"></i>
+							</li>
+							<li>
+								<a href="javascript:void(0)">Usuário</a>
+							</li>
+						</ul>
+						<!-- END PAGE BREADCRUMB -->
+						<!-- END PAGE HEADER-->
+						<!-- BEGIN PAGE CONTENT-->
+						<h:form id="form_pesquisa_usuario" styleClass="form-horizontal form-row-seperated" prependId="false">	
+							<h:panelGroup layout="block" styleClass="row" id="usuarioPesquisa">
+								<h:panelGroup layout="block" styleClass="col-md-12" rendered="#{empty usuarioMBean.usuarioCad}">
+									<div class="portlet light">
+										<div class="portlet-title">
+											<div class="caption">
+												<i class="icon-magnifier font-green-sharp"></i>
+												<span class="caption-subject font-green-sharp bold uppercase">Pesquisar</span>
+												<span class="caption-helper">Pesquise o Usuário</span>
+											</div>
+											<div class="actions btn-set">
+												<button jsf:action="#{usuarioMBean.pesquisar()}" class="btn green-haze btn-circle ">
+													<i class="fa fa-search"></i> Pesquisar
+													<f:ajax execute="@form" render="form_pesquisa_usuario" />
+												</button>
+												
+												<button jsf:immediate="true" jsf:action="#{usuarioMBean.adicionarNovoUsuario()}" class="btn btn-default btn-circle ">
+													<i class="fa fa-plus"></i> Adicionar novo
+													<f:ajax immediate="true" render="form_cadastro_usuario form_pesquisa_usuario"></f:ajax>
+												</button>
+												<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="Tela Cheia" />
+											</div>
+										</div>
+										<div class="portlet-body">
+											<div class="form-body">
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label col-md-3">Login </label>
+															<div class="col-md-9">
+																<h:inputText id="loginPesq" pt:name="loginPesq" maxlength="50" styleClass="form-control uppercase noespace" pt:placeholder="ex: LeonardoMurta" 
+																	value="#{usuarioMBean.usuarioPesq.login}">
+																</h:inputText>
+																	<f:passThroughAttribute name="data-inputmask" value="'alias': 'upper'"/>
+															</div>
+														</div>
+													</div>	
+													
+												</div>
+												
+												<div class="row">
+													<div class="col-md-12">
+														<!-- BEGIN EXAMPLE TABLE PORTLET-->
+														<div class="portlet light">
+															<div class="portlet-body">
+																<h4>Resultados</h4>
+																<table class="table table-striped table-bordered table-hover" id="table_cadastro_usuario">
+																	<thead>
+																		<tr>
+																			
+																			<th>
+																				 Login
+																			</th>
+																			<th>
+																				 Tipo
+																			</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<ui:repeat var="b" id="usuarioPesqList" value="#{usuarioMBean.usuarioPesqList}">
+																			<tr class="odd gradeX">
+																																						
+																				<td>
+																					#{b.login}
+																				</td>
+																				<td>
+																					#{b.perfilUsuario}
+																				</td>
+																				<td>
+																					<div class="margin-bottom-5">
+																						<button jsf:action="#{usuarioMBean.editar(b)}" class="btn btn-sm yellow filter-submit margin-bottom">
+																							<i class="fa fa-search"></i> Editar
+																						</button>
+																					</div>
+																						<button jsf:action="#{usuarioMBean.excluir(b)}"  id="demo_3" class="btn btn-sm red filter-cancel">
+																							<i class="fa fa-times"></i> Excluir
+																						</button>
+																				</td>
+																			</tr>	
+																		</ui:repeat>														
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														<!-- END EXAMPLE TABLE PORTLET-->
+													</div>
+												</div>											
+											</div>
+										</div>
+									</div>	
+									<script>TableManaged.initUsuario()</script>
+								</h:panelGroup>
+							</h:panelGroup>	
+						</h:form>	
+						
+						<h:form id="form_cadastro_usuario" styleClass="form-horizontal form-row-seperated" prependId="false">	
+							<h:panelGroup layout="block" styleClass="row" id="usuario">
+								<h:panelGroup layout="block" styleClass="col-md-12" rendered="#{not empty usuarioMBean.usuarioCad}">
+									<div class="portlet light">
+										<div class="portlet-title">
+											<div class="caption">
+												<i class="icon-basket font-green-sharp"></i>
+												<span class="caption-subject font-green-sharp bold uppercase">
+												Usuário </span>
+												<span class="caption-helper">Cadastre Usuário</span>
+											</div>
+											<div class="actions btn-set">
+											
+												<button jsf:immediate="true" jsf:action="#{usuarioMBean.abrirPesquisa()}" class="btn btn-default btn-circle ">
+													<i class="fa fa-search"></i> Pesquisar
+													<f:ajax immediate="true" render="usuarioPesquisa usuario" />
+												</button>
+												
+												<button jsf:immediate="true" jsf:action="#{usuarioMBean.limpar()}" class="btn btn-default btn-circle ">
+													<i class="fa fa-plus"></i> Novo
+													<f:ajax immediate="true" render="form_cadastro_usuario" />
+												</button>
+												
+												<button jsf:action="#{usuarioMBean.salvarUsuario()}" class="btn green-haze btn-circle">
+													<i class="fa fa-check"></i> Salvar
+												</button>
+												
+												<button class="btn green-haze btn-circle" jsf:action="#{usuarioMBean.salvarUsuarioContinuar()}">
+													<i class="fa fa-check-circle"></i> Salvar &amp; Continuar edição
+												</button>
+												
+												<div class="btn-group">
+													<a class="btn yellow btn-circle" href="javascript:;" data-toggle="dropdown">
+													<i class="fa fa-share"></i> Mais <i class="fa fa-angle-down"></i>
+													</a>
+													<ul class="dropdown-menu pull-right">
+														<li>
+															<a href="javascript:;">Duplicar </a>
+														</li>
+														<li>
+															<h:commandLink action="#{usuarioMBean.excluirUsuario()}" 
+																immediate="true" 
+																rendered="#{not empty usuarioMBean.usuarioCad.idUsuario}"
+																value="Excluir">
+																<f:ajax render="@form" />
+															</h:commandLink>	
+														</li>
+														<li class="divider"></li>
+														<li>
+															<a href="javascript:;">Imprimir </a>
+														</li>
+													</ul>
+												</div>
+												<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="Tela Cheia" />
+											</div>
+										</div>
+										
+										
+										<div class="portlet-body">
+											<h:panelGroup layout="block" styleClass="alert alert-success" rendered="#{facesContext.maximumSeverity.ordinal == 0}" >
+											   <button class="close" data-close="alert"></button>
+											   <ui:repeat var="msg0" value="#{facesContext.messageList}">
+											    	#{msg0.summary}<br />
+											   </ui:repeat>
+								             </h:panelGroup> 
+							             
+											<div class="tabbable">
+												<ul class="nav nav-tabs">
+													<li class="active">
+														<a href="#tab_geral" data-toggle="tab">
+														Usuário </a>
+													</li>
+													
+													
+												</ul>
+												<div class="tab-content no-space">
+													<div class="alert alert-danger display-hide">
+														<button class="close" data-close="alert"></button>
+														Existem alguns erros no formulário. Por favor, verifique os campos.
+													</div>	
+													
+													<h:panelGroup layout="block" styleClass="alert alert-danger" rendered="#{facesContext.maximumSeverity.ordinal == 2}" >
+													   <button class="close" data-close="alert"></button>
+													   <ui:repeat var="msg0" value="#{facesContext.messageList}">
+													    	#{msg0.summary}<br />
+													   </ui:repeat>
+										             </h:panelGroup> 											
+												
+													<div class="tab-pane active" id="tab_geral">
+														<div class="form-body">
+
+															<div class="row">
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label class="control-label col-md-3">Login <span class="required" aria-required="true">*</span></label>
+																		<div class="col-md-9">
+																			<h:inputText id="login" pt:name="login" maxlength="100" styleClass="form-control maxlength-handler" pt:placeholder="ex: leonardopy" 
+																				value="#{usuarioMBean.usuarioCad.login}">
+																			</h:inputText>
+																			<span class="help-block">máximo 100 caracteres</span>
+																		</div>
+																	</div>
+																</div>																
+																	
+															</div>	
+															
+															<div class="row">
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label class="control-label col-md-3">Senha <span class="required" aria-required="true">*</span></label>
+																		<div class="col-md-9">
+																			<h:inputSecret id="senha" pt:name="senha" maxlength="10" styleClass="form-control maxlength-handler" pt:placeholder="ex: leonardopy" 
+																				value="#{usuarioMBean.usuarioCad.senha}">
+																			</h:inputSecret>
+																			<span class="help-block">máximo 10 caracteres</span>
+																		</div>
+																	</div>
+																</div>																
+															</div>	
+															
+															<div class="row">
+																<div class="col-md-6">
+																	
+																	
+																	
+																	<div class="form-group">
+																			<label class="control-label col-md-3">Perfil </label>
+																			<div class="col-md-9">
+																				<div class="radio-list">
+																					<label class="radio-inline">
+																						<input type="radio" jsf:id="adm" pt:name="adm" value="1">
+																							<f:passThroughAttribute name="checked" value="#{ 1 eq usuarioMBean.usuarioCad.perfil? 'checked' : null}" />
+																						</input>
+																						Administrador
+																					 </label>
+																					<label class="radio-inline">
+																						<input type="radio" jsf:id="pub" pt:name="pub" value="2">
+																							<f:passThroughAttribute name="checked" value="#{ 2 eq usuarioMBean.usuarioCad.perfil? 'checked' : null}" />
+																						</input>
+																						Publicador
+																					 </label>
+																				</div>
+																			</div>
+																		</div>
+																	
+																	
+																</div>																
+															</div>
+															
+														</div>
+													</div>
+													
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</h:panelGroup>
+							</h:panelGroup>
+							<script>Metronic.initUniform();FormValidation.init($("#form_cadastro_usuario"));ComponentsFormTools.handleInputMasks();</script>
+						</h:form>														
+						<!-- END PAGE CONTENT-->
+
+			  		</div>
+			  	</div>
+	  		</ui:define>
+	  		
+	  		<ui:define name="modals">		
+				<ui:include src="../../includes/modals/excluirModal.xhtml">
+					<ui:param name="bean" value="#{usuarioMBean}" />	
+					<ui:param name="confirmMethod" value="excluir" />		
+					<ui:param name="idModal" value="modalExcluirUsuario" />		
+					<ui:param name="description" value="Deseja realmente excluir?" />	
+				</ui:include>
+	  		</ui:define>	
+	  		
+	  		<ui:define name="jsFooter">		
+				<!-- BEGIN PAGE LEVEL PLUGINS -->
+				<!-- IMPORTANT! fullcalendar depends on jquery-ui.min.js for drag & drop support -->
+				<h:outputScript name="theme/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"/>
+				<h:outputScript name="theme/assets/global/plugins/jquery-validation/js/additional-methods.min.js"/>
+				<h:outputScript name="theme/assets/global/plugins/select2/select2.min.js"/>
+				<h:outputScript name="theme/assets/global/plugins/morris/morris.min.js"/>
+				<h:outputScript name="theme/assets/global/plugins/morris/raphael-min.js"/>
+				<h:outputScript name="theme/assets/global/plugins/jquery.sparkline.min.js"/>
+				<h:outputScript name="theme/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" />
+				<h:outputScript name="theme/assets/global/plugins/jquery-inputmask/jquery.inputmask.bundle.js"/>
+				<h:outputScript name="theme/assets/global/plugins/jquery-maskmoney/jquery.maskMoney.min.js"/>
+				<h:outputScript name="theme/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" />
+				<h:outputScript name="theme/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" />
+				<h:outputScript name="theme/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js" />
+				<h:outputScript name="theme/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js" />
+				<h:outputScript name="theme/assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript" />
+				
+				<!-- END PAGE LEVEL PLUGINS -->
+				<!-- BEGIN PAGE LEVEL SCRIPTS -->
+				<h:outputScript name="theme/assets/global/scripts/metronic.js" />
+				<h:outputScript name="theme/assets/admin/layout/scripts/layout.js" />
+				<h:outputScript name="theme/assets/admin/layout/scripts/quick-sidebar.js" />
+				<h:outputScript name="theme/assets/admin/pages/scripts/form-validation.js" />
+				<h:outputScript name="theme/assets/admin/pages/scripts/erp-components-form-tools.js"/>
+				<h:outputScript name="theme/assets/admin/pages/scripts/ui-blockui.js" />
+				<h:outputScript name="theme/assets/admin/pages/scripts/table-managed.js" />
+				<h:outputScript name="theme/assets/admin/pages/scripts/ui-alert-dialog-api.js" />
+				
+				
+				<!-- END PAGE LEVEL SCRIPTS -->
+				<script>
+				jQuery(document).ready(function() { 
+				   Metronic.init(); // init  core componets
+				   Layout.init(); // init layout
+				   QuickSidebar.init(); // init quick sidebar
+				   FormValidation.init($("#form_cadastro_usuario"));
+				   ComponentsFormTools.handleInputMasks();
+				   TableManaged.initProduto();
+				   UIAlertDialogApi.init();
+				});
+				</script>
+				<!-- END JAVASCRIPTS -->	
+			</ui:define>
+    		
+		</ui:composition>
+	</h:body>
+</html>

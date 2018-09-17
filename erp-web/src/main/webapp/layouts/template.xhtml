@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="pt-br" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="pt-br" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  	xmlns:h="http://xmlns.jcp.org/jsf/html"
+  	xmlns:a4j="http://richfaces.org/a4j"
+  	xmlns:jsf="http://xmlns.jcp.org/jsf"
+  	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+  	xmlns:f="http://xmlns.jcp.org/jsf/core" 
+  	xmlns:rich="http://richfaces.org/rich">
+<!--<![endif]-->
+
+<h:head>
+	<meta charset="utf-8"/>
+	<title><ui:insert name="title">Sistema Adminstração</ui:insert></title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<meta content="width=device-width, initial-scale=1" name="viewport"/>
+	<meta content="" name="description "/>
+	<meta content="leonardopy@gmail.com" name="author" />
+	
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css"/>
+	<h:outputStylesheet name="theme/assets/global/plugins/font-awesome/css/font-awesome.min.css" />
+	<h:outputStylesheet name="theme/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" />
+	<h:outputStylesheet name="theme/assets/global/plugins/bootstrap/css/bootstrap.min.css" />
+	<h:outputStylesheet name="theme/assets/global/plugins/uniform/css/uniform.default.css" />
+	<h:outputStylesheet name="theme/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" />	
+	<!-- END GLOBAL MANDATORY STYLES -->
+	<!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
+	<h:outputStylesheet name="theme/assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+	<h:outputStylesheet name="theme/assets/global/plugins/fullcalendar/fullcalendar.min.css" />
+	<h:outputStylesheet name="theme/assets/global/plugins/jqvmap/jqvmap/jqvmap.css" />	
+	<h:outputStylesheet name="theme/assets/global/plugins/morris/morris.css" />
+	<!-- END PAGE LEVEL PLUGIN STYLES -->
+	<!-- BEGIN PAGE LEVEL STYLES -->
+	<ui:insert name="css" />
+	<!-- END PAGE LEVEL SCRIPTS -->
+	<!-- BEGIN THEME STYLES -->
+	<h:outputStylesheet name="theme/assets/global/css/components-rounded.css" id="style_components" />
+	<h:outputStylesheet name="theme/assets/global/css/plugins.css" />
+	<h:outputStylesheet name="theme/assets/admin/layout/css/layout.css" />
+	<h:outputStylesheet name="theme/assets/admin/layout/css/themes/default.css" id="style_color" />
+	<h:outputStylesheet name="theme/assets/admin/layout/css/custom.css" />
+	<!-- END THEME STYLES -->
+	 <h:outputScript library="omnifaces" name="fixviewstate.js" />
+ 	<link rel="shortcut icon" href="#{request.contextPath}/resource/img/favicon.ico"/>
+</h:head>
+
+<h:body styleClass="#{bodyCss}">
+
+	 <ui:insert name="header">
+ 		<ui:include src="../pages/includes/header.xhtml">
+			<ui:param name="bean" value="#{bean}" />
+		</ui:include>
+	 </ui:insert>
+
+	<div class="page-container">
+	 	<ui:insert name="sidebar">
+			<ui:include src="../pages/includes/sidebar.xhtml">
+				<ui:param name="bean" value="#{bean}" />
+			</ui:include>
+		</ui:insert>
+		<ui:insert name="content"/>
+		<ui:insert name="modals"/>
+	</div>
+	  
+	<ui:insert name="footer">
+	  
+		<!-- BEGIN FOOTER -->
+		<div class="page-footer">
+			<div class="page-footer-inner">
+				 2015 RP System
+			</div>
+			<div class="scroll-to-top">
+				<i class="icon-arrow-up"></i>
+			</div>
+		</div>
+		<!-- END FOOTER -->
+		<!-- BEGIN JAVASCRIPTS -->
+		<!-- BEGIN CORE PLUGINS -->
+		<!--[if lt IE 9]>
+			<h:outputScript name="theme/assets/global/plugins/respond.min.js" />
+			<h:outputScript name="theme/assets/global/plugins/excanvas.min.js" /> 
+		<![endif]-->
+		<h:outputScript name="theme/assets/global/plugins/jquery.min.js" />
+		<h:outputScript name="theme/assets/global/plugins/jquery-migrate.min.js" />
+		<!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+		<h:outputScript name="theme/assets/global/plugins/jquery-ui/jquery-ui.min.js" />
+		<h:outputScript name="theme/assets/global/plugins/bootstrap/js/bootstrap.min.js" />
+		<h:outputScript name="theme/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" />
+		<h:outputScript name="theme/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" />
+		<h:outputScript name="theme/assets/global/plugins/jquery.blockui.min.js" />
+		<h:outputScript name="theme/assets/global/plugins/jquery.cokie.min.js" />
+		<h:outputScript name="theme/assets/global/plugins/uniform/jquery.uniform.min.js" />
+		<h:outputScript name="theme/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" />
+		
+		<!-- END CORE PLUGINS --> 
+		
+		<a4j:status
+	        	onstart="javascript:UIBlockUI.block();"    
+	          	onstop="javascript:UIBlockUI.unblock();">                   
+	     </a4j:status> 
+	     
+	  </ui:insert>
+	  
+	<ui:insert name="jsFooter" />
+	  
+</h:body>
+
+</html>

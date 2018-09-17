@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.erp</groupId>
+	<artifactId>erp</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<name>Sistema ERP</name>
+
+	<modules>
+		<module>erp-web</module>
+		<module>erp-ejb</module>
+		<module>erp-ear</module>
+	</modules>
+
+	<properties>
+	
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+
+		<!-- JBoss dependency versions -->
+		<version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
+		<version.wildfly>9.0.0.Final</version.wildfly>
+		<version.jboss.spec.javaee.7.0>1.0.3.Final</version.jboss.spec.javaee.7.0>
+
+
+		<!-- other plugin versions -->
+		<version.compiler.plugin>3.3</version.compiler.plugin>
+		<version.ear.plugin>2.10.1</version.ear.plugin>
+		<version.ejb.plugin>2.5.1</version.ejb.plugin>
+		<version.war.plugin>2.6</version.war.plugin>
+
+		<!-- maven-compiler-plugin -->
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+	</properties>
+	
+	
+	<dependencyManagement>
+        <dependencies>
+
+            <dependency>
+				<groupId>br.com.erp</groupId>
+                <artifactId>erp-ejb</artifactId>
+                <version>${project.version}</version>
+                <type>ejb</type>
+            </dependency>
+
+            <dependency>
+				<groupId>br.com.erp</groupId>
+                <artifactId>erp-web</artifactId>
+                <version>${project.version}</version>
+                <type>war</type>
+                <scope>compile</scope>
+            </dependency>
+
+            <!-- Define the version of JBoss' Java EE 7 APIs we want to import.
+               Any dependencies from org.jboss.spec will have their version defined by this
+               BOM -->
+            <!-- JBoss distributes a complete set of Java EE 7 APIs including
+                a Bill of Materials (BOM). A BOM specifies the versions of a "stack" (or
+                a collection) of artifacts. We use this here so that we always get the correct
+                versions of artifacts. Here we use the jboss-javaee-7.0 stack (you can
+                read this as the JBoss stack of the Java EE 7 APIs). You can actually
+                use this stack with any version of WildFly that implements Java EE 7, not
+                just WildFly 8! -->
+            <dependency>
+                <groupId>org.jboss.spec</groupId>
+                <artifactId>jboss-javaee-7.0</artifactId>
+                <version>${version.jboss.spec.javaee.7.0}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+	
+	<build>
+        <plugins>
+            <!-- Compiler plugin enforces Java 1.6 compatibility and 
+                activates annotation processors -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.compiler.plugin}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin> 
+                <!-- The WildFly plugin deploys your ear to a local JBoss
+                    AS container -->
+                <!-- Due to Maven's lack of intelligence with EARs we need 
+                    to configure the wildfly maven plugin to skip deployment for all modules.
+                    We then enable it specifically in the ear module. -->
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>${version.wildfly.maven.plugin}</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

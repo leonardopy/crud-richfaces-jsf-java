@@ -1,0 +1,52 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  	xmlns:h="http://xmlns.jcp.org/jsf/html"
+  	xmlns:a4j="http://richfaces.org/a4j"
+  	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+  	xmlns:rich="http://richfaces.org/rich"
+  	xmlns:jsf="http://xmlns.jcp.org/jsf"
+  	xmlns:f="http://xmlns.jcp.org/jsf/core" 
+ 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<!-- BEGIN SIDEBAR -->
+<div class="page-sidebar-wrapper">
+
+	<div class="page-sidebar navbar-collapse collapse">
+		<!-- BEGIN SIDEBAR MENU -->
+		<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+			<ui:repeat var="menu" value="#{bean.getMenuSideBar()}" varStatus="status">
+				<li class="#{bean.menuActive(menu)} ">
+					<a href="#{empty menu.menuFilhos ? bean.getServerContextPathWithoutBar().concat(menu.path) : 'javascript:;'}">
+						<i class="#{menu.icone}"></i>
+						<span class="title">#{menu.nome}</span>
+						<h:outputText escape="false" value="&lt;span class='arrow '>&lt;/span>" rendered="#{not empty menu.menuFilhos}" />
+					</a>
+					<ui:repeat var="menuSub" value="#{menu.menuFilhos}" varStatus="statusSub">
+						<h:outputText value="&lt;ul class='sub-menu'>" escape="false" rendered="#{statusSub.first}" />
+						<ui:fragment rendered="#{menuSub.status == 'ATIVO'}">
+								<li class="#{bean.menuActive(menuSub)} ">
+									<a href="#{empty menuSub.menuFilhos ? bean.getServerContextPathWithoutBar().concat(menuSub.path) : 'javascript:;'}">
+										<i class="#{menuSub.icone}"></i>
+										<span class="title">#{menuSub.nome}</span>
+										<h:outputText escape="false" value="&lt;span class='arrow '>&lt;/span>" rendered="#{not empty menuSub.menuFilhos}" />
+									</a>
+									<ui:repeat var="menuSubSub" value="#{menuSub.menuFilhos}" varStatus="statusSubSub">
+										<h:outputText value="&lt;ul class='sub-menu'>" escape="false" rendered="#{statusSubSub.first}" />
+											<li class="#{bean.menuActive(menuSubSub)}">
+												<a href="#{bean.getServerContextPathWithoutBar()}#{menuSubSub.path}"><i class="#{menuSubSub.icone}"></i> #{menuSubSub.nome}</a>
+											</li>
+										<h:outputText value="&lt;/ul>" escape="false" rendered="#{statusSubSub.last}" />
+									</ui:repeat>
+								</li>
+						</ui:fragment>
+							<h:outputText value="&lt;/ul>" escape="false" rendered="#{statusSub.last}" />
+					</ui:repeat>
+				</li>
+			</ui:repeat>
+		</ul>
+		<!-- END SIDEBAR MENU -->
+	</div>
+</div>
+<!-- END SIDEBAR -->
+
+</f:view>
